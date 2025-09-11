@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ballon</title>
+</head>
+<style>
+    body {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+    .ballon {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: red;
+    }
+</style>
+<script>
+    function changeColor(x) {
+        if (x.style.backgroundColor == 'red') {
+            x.style.backgroundColor = 'green';
+        }
+        else if (x.style.backgroundColor == "green") {
+            x.style.backgroundColor = 'blue';
+        }
+        else {
+            x.style.backgroundColor = 'red';
+        }
+        return false;
+    }
+
+    function invertColor(x) {
+        if (x.style.backgroundColor == 'blue') {
+            x.style.backgroundColor = 'green';
+        }
+        else if (x.style.backgroundColor == "green") {
+            x.style.backgroundColor = 'red';
+        }
+        else {
+            x.style.backgroundColor = 'blue';
+        }
+        return false;
+    }
+
+    function pop(x) {
+        changeColor(x);
+        if (x.offsetWidth < "420") {
+            x.style.width = (x.offsetWidth + 10) + "px";
+            x.style.height = (x.offsetHeight + 10) + "px";
+        }
+        else {
+            x.style.height = "200px";
+            x.style.opacity = "0%";
+            setTimeout(() => {
+                x.style.opacity = "100%"
+                x.style.backgroundColor = "red";
+            }, 500);
+            sleep(1000)
+        }
+    }
+
+    function left(x) {
+        if (x.offsetWidth > "200") {
+            invertColor(x);
+            x.style.width = (x.offsetWidth - 5) + "px";
+            x.style.height = (x.offsetHeight - 5) + "px";
+        }
+    }
+</script>
+<body>
+    <div class="ballon" onclick="pop(this)" onmouseleave="left(this)"></div>
+</body>
+</html>

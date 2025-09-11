@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Lexend Deca', sans-serif;
+        background-image: url('https://wallpaperaccess.com/full/288027.jpg');
+        background-position: fixed;
+        background-repeat: no-repeat;
+        object-fit: cover;
+    }
+
+    .Calculator {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #121421;
+        padding: 16px;
+        border-radius: 20px;
+        height: auto;
+        width: auto;
+        margin: auto;
+        box-shadow: rgba(0, 0, 0, 0.19) 6px 6px;
+    }
+
+    .display {
+        background-color: #dcdbe1;
+        border: black solid 1px;
+        color: black;
+        width: 40%;
+        font-size: 20px;
+        border-radius: 5px;
+        height: 50px;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        width: 18%;
+    }
+
+    .dropdown-content {
+        display: none;
+        min-width: 100%;
+        margin: 0;
+        z-index: 1;
+        background-color: whitesmoke;
+        position: absolute;
+    }
+
+    .dropdown-content a {
+        margin: 0;
+        padding: 0;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropbtn {
+        width: 100%;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        height: 50px;
+        color: black;
+        border: none;
+        background-color: blanchedalmond;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .input {
+        margin-top: 15px;
+        background-color: #04488c;
+        color: white;
+        border: solid black 1px;
+        width: 100%;
+        border-radius: 10px;
+        height: 60px;
+        outline: none;
+    }
+
+    .dropdown-content>input {
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+        background-color: whitesmoke;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .dropdown-content>input:hover {
+        background-color: chartreuse;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #204f7d;
+    }
+
+    h1 {
+        color: white;
+        text-align: center;
+    }
+
+    input[type=number] {
+        text-align: right;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.ops').click(function() {
+            $('#ops').val($(this).val());
+        })
+
+        $('#calculate').click(function() {
+            if($('#ops').val() == 'none')
+            {
+                console.log('Select an operator');
+                alert('Select an operator');
+            }
+            else if ($('#num1').val() < 0 || $('#num2').val() < 0) {
+                console.log('Error : (');
+                alert('Error : (');
+            }
+            else if (($('#ops').val() == '%' || $('#ops').val() == '/') && $('#num2').val() == 0) 
+            {
+                console.log("It's over 9000!")
+                alert("It's over 9000!")
+            }
+            else if (parseInt($("#num1").val()) < 0 || parseInt($("#num2").val()) < 0 || isNaN(parseInt($("#num1").val())) || isNaN(parseInt($("#num2").val()))) {
+             alert("Error :(");
+            }
+
+            else {
+                var result = eval($('#num1').val() + $('#ops').val() + $('#num2').val());
+                console.log(result);
+                alert(result);
+            }
+        })
+    })
+
+    setTimeout(wait, 30000);
+    function wait() {
+        alert('Please, use me...');
+    }
+</script>
+<body>
+    <div class="Calculator">
+        <h1>Le Calculatrice</h1>
+        <input class="display" type="text" id="num1" />
+        <div class="dropdown">
+            <input class="dropbtn" type="button" value="none" id="ops" />
+            <div class="dropdown-content">
+                <input class="ops" type="button" value="+" />
+                <input class="ops" type="button" value="-" />
+                <input class="ops" type="button" value="*" />
+                <input class="ops" type="button" value="/" />
+                <input class="ops" type="button" value="%" />
+            </div>
+        </div>
+        <input class="display" type="text" id="num2" />
+        <input class="input" id="calculate" type="submit" value="Try Me!">
+        <p id="result"></p>
+    </div> 
+</body>
+</html>
