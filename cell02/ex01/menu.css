@@ -1,0 +1,84 @@
+.dropbtn {
+    background-color: aqua;
+    color: black;
+    padding: 16px;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    top: 100%;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+
+.dropdown:hover .dropbtn {
+    background-color: blanchedalmond;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    top: 100%;
+}
+
+.one {
+    display: none;
+    position: absolute;
+    top: 110%;
+}
+
+.first:hover .one {
+    display: flex;
+}
+
+.two {
+    display: none;
+    position: absolute;
+    top: 110%;
+}
+
+.second:hover .two {
+    display: flex;
+}
+
+.three {
+    display: none;
+    position: absolute;
+    top: 110%;
+}
+
+.third:hover .three {
+    display: flex;
+}
+
+.four {
+    display: none;
+    position: absolute;
+    top: 110%;
+}
+
+.fourth:hover .four {
+    display: flex;
+}

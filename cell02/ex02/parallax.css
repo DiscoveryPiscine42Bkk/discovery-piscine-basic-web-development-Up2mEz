@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+.one {
+    background-image: url("https://www.neuhauser.fr/uploads/product/300300.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 50%;
+    position: relative;
+}
+
+.first {
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    justify-content: center;
+    color: #2E475D;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.two {
+    background-color: black;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.second {
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    justify-content: center;
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.three {
+    background-image: url("https://www.synova.biz/images/uploads/product/169/Butter-croissant%20(diamond%20shape).jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 50%;
+    position: relative;
+}
+
+.third {
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    color: black;
+    opacity: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
