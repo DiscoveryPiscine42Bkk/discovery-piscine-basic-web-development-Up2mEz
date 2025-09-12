@@ -2,81 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ballon</title>
+    <title>Document</title>
 </head>
 <style>
-    body {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        margin: 0;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-    }
-    .ballon {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        background-color: red;
-    }
+body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f5;
+}
+#balloon {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+}
 </style>
-<script>
-    function changeColor(x) {
-        if (x.style.backgroundColor == 'red') {
-            x.style.backgroundColor = 'green';
-        }
-        else if (x.style.backgroundColor == "green") {
-            x.style.backgroundColor = 'blue';
-        }
-        else {
-            x.style.backgroundColor = 'red';
-        }
-        return false;
-    }
-
-    function invertColor(x) {
-        if (x.style.backgroundColor == 'blue') {
-            x.style.backgroundColor = 'green';
-        }
-        else if (x.style.backgroundColor == "green") {
-            x.style.backgroundColor = 'red';
-        }
-        else {
-            x.style.backgroundColor = 'blue';
-        }
-        return false;
-    }
-
-    function pop(x) {
-        changeColor(x);
-        if (x.offsetWidth < "420") {
-            x.style.width = (x.offsetWidth + 10) + "px";
-            x.style.height = (x.offsetHeight + 10) + "px";
-        }
-        else {
-            x.style.height = "200px";
-            x.style.opacity = "0%";
-            setTimeout(() => {
-                x.style.opacity = "100%"
-                x.style.backgroundColor = "red";
-            }, 500);
-            sleep(1000)
-        }
-    }
-
-    function left(x) {
-        if (x.offsetWidth > "200") {
-            invertColor(x);
-            x.style.width = (x.offsetWidth - 5) + "px";
-            x.style.height = (x.offsetHeight - 5) + "px";
-        }
-    }
-</script>
 <body>
-    <div class="ballon" onclick="pop(this)" onmouseleave="left(this)"></div>
+    <div id="balloon"></div>
+    <script>
+        let balloon = document.getElementById('balloon');
+        let size = 200; // Initial size
+        let colors = ['red', 'green', 'blue']; // Color cycle
+        let colorIndex = 0;
+
+        // Function to update the balloon's size and color
+        function updateBalloon() {
+            balloon.style.width = size + 'px';
+            balloon.style.height = size + 'px';
+            balloon.style.backgroundColor = colors[colorIndex];
+        }
+
+        // On click event: Grow the balloon and change its color
+        balloon.onclick = function() {
+            if (size+10 < 420) {
+                size += 10;
+                colorIndex = (colorIndex + 1) % colors.length; // Cycle through colors
+            } else {
+                // Balloon "explodes" and resets to the original size
+                size = 200;
+                colorIndex = 0; // Reset color to red
+            }
+            updateBalloon();
+        }
+
+        // On mouseleave event: Shrink the balloon and reverse color order
+        balloon.onmouseleave = function() {
+            if (size > 200) {
+                size -= 5;
+                colorIndex = (colorIndex - 1 + colors.length) % colors.length; // Reverse color cycle
+            }
+            updateBalloon();
+        }
+
+        // Initial state
+        updateBalloon();
+    </script>
 </body>
 </html>
