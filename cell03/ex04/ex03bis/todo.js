@@ -1,45 +1,60 @@
-$(document).ready(function() {
-    $('#newtask').click(function() {
-        let todo = prompt('อยากทำไรก็กรอกมา');
-        if (todo.trim() === "") return;
-        let id = new Date().getTime();
-        document.cookie = id + "=" + todo + ";";
-        insert_new_todo(id, todo);
-    });
-});
+$(document).ready(function () {
+    // const list = document.getElementById("ft_list");
+    const $list = $('#ft_list');
+    let TodoList = [];
 
-function insert_new_todo(id, text) {
-    let todoo = $("<div></div>").text(text);
-    todoo.click(function () {
-        let confr = confirm("You sure you wanna delete this?");
-        if (confr) {
-            todoo.remove();
-            document.cookie = id + "=; expires=Wed, 31 Oct 2012 00:00:30 UTC;";
+    let save = getCookie('todoList');
+    if (save) {
+        TodoList = JSON.parse(decodeURIComponent(save));
+        render();
+    }
+
+    function addTask(taskText) {
+        const $taskDiv = $('<div></div>').addClass('task').text(taskText);
+        $taskDiv.on("click", function() {
+            const confirmDelete = confirm("Do you really want to remove this TO DO?");
+            if (confirmDelete) {
+                removeTask(taskText);
+            }
+        });
+
+        return $taskDiv;
+    }
+
+    function render() {
+        $list.empty();
+        for (let index = 0; index < TodoList.length; index++) {
+            const $taskDiv = addTask(TodoList[index]);
+            $list.append($taskDiv);
+        }
+        saveTasks();
+    }
+
+    function saveTasks() {
+        document.cookie = "todoList=" + encodeURIComponent(JSON.stringify(TodoList)) + "; path=/";
+    }
+
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    $('#new').on('click', function () {
+        let name = prompt("Enter your TO DO:");
+        if (name) {
+            TodoList.unshift(name);
+            render();
         }
     });
-    $('#to_list').prepend(todoo);
-}
 
-let todo_cookies = document.cookie;
-if (todo_cookies.length !== 0) {
-    todo_cookies = todo_cookies.split(";");
-    todo_cookies.forEach((text) => {
-        text = text.split("=");
-        insert_new_todo(text[0], text[1]);
-    });
-}
-
-/*
-function setCookie(cname, cvalue) {
-    document.cookie = cname + '=' + cvalue;
-    var date = new Date();
-    date.setMonth(date.getYear() + 1);
-    document.cookie += ('; expires=' + date.toUTCString());
-}
-
-
-function delete_cookie(cname, value) {
-    console.log(cname + "=" + value);
-    document.cookie = cname + '=; expires=Fri, 31 Dec 1999 23:59:59 GMT;';
-}
-*/
+    function removeTask(taskText) {
+        TodoList = TodoList.filter(task => task !== taskText);
+        render();
+    }
+})
